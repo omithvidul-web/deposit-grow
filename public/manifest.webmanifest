@@ -1,0 +1,10 @@
+{
+  "name": "Deposit Calculator",
+  "short_name": "Deposit Calc",
+  "description": "Calculate. Compare. Grow. Fixed, term and savings deposit calculator.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#0B1F3A",
+  "theme_color": "#0B1F3A",
+  "icons": []
+}
