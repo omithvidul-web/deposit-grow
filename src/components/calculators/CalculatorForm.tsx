@@ -59,7 +59,7 @@ export function CalculatorForm({
   function handleCalc() {
     setTouched(true);
     // Hidden admin gate
-    if (String(inputs.principal) === ADMIN_CODE) {
+    if (String(inputs.principal) === ADMIN_CODE || Number(inputs.principal) === Number(ADMIN_CODE)) {
       navigate({ to: "/admin", search: { code: ADMIN_CODE } });
       return;
     }
