@@ -55,7 +55,7 @@ export function SDForm({
 
   function handleCalc() {
     setTouched(true);
-    if (String(inputs.opening) === ADMIN_CODE) {
+    if (String(inputs.opening) === ADMIN_CODE || Number(inputs.opening) === Number(ADMIN_CODE)) {
       navigate({ to: "/admin", search: { code: ADMIN_CODE } });
       return;
     }
