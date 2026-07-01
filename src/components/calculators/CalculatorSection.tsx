@@ -264,9 +264,7 @@ function ResultsArea({
   return (
     <div className="grid gap-4">
       <ResultCard result={result} />
-      <div ref={chartRef}>
-        <GrowthChart series={result.series} />
-      </div>
+      <GrowthChart series={result.series} exportRef={chartRef} />
       <SmartInsights insights={insights} />
     </div>
   );
