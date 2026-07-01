@@ -16,10 +16,13 @@ import { formatMoney } from "@/lib/currency";
 
 export function GrowthChart({
   series,
+  exportRef,
 }: {
   series: Array<{ t: number; label: string; value: number }>;
+  exportRef?: React.RefObject<HTMLDivElement | null>;
 }) {
-  const ref = useRef<HTMLDivElement>(null);
+  const localRef = useRef<HTMLDivElement>(null);
+  const ref = exportRef ?? localRef;
   const { currency } = useApp();
 
   const exportPng = async () => {
