@@ -13,6 +13,7 @@ import { Button } from "@/components/ui/button";
 import { Download } from "lucide-react";
 import { useApp } from "@/contexts/AppContext";
 import { formatMoney } from "@/lib/currency";
+import { withAdGate } from "@/components/ads/AdsGate";
 
 export function GrowthChart({
   series,
@@ -43,7 +44,7 @@ export function GrowthChart({
           </div>
           <div className="font-display text-sm font-semibold">Projected value over time</div>
         </div>
-        <Button variant="outline" size="sm" onClick={exportPng}>
+        <Button variant="outline" size="sm" onClick={withAdGate(exportPng)}>
           <Download className="mr-1.5 h-3.5 w-3.5" /> PNG
         </Button>
       </div>
