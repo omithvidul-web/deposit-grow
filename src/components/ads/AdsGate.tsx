@@ -1,13 +1,10 @@
-import { lsGet, lsSet } from "@/lib/storage";
 import { getAds } from "@/lib/site";
-
-const COOLDOWN_KEY = "dc.ads.lastShown";
 
 /**
  * Adsterra gate. Returns a wrapped action that — when ads are enabled, the
- * direct link is configured, and the cooldown has elapsed — opens the direct
- * link in a new tab, then immediately runs the original action so the user
- * never re-enters data. When ads aren't enabled, runs the action directly.
+ * direct link is configured — opens the direct link in a new tab first, then
+ * immediately runs the original action so the user never re-enters data. When
+ * ads aren't enabled, runs the action directly.
  */
 export function withAdGate(action: () => void) {
   return () => {
@@ -16,13 +13,6 @@ export function withAdGate(action: () => void) {
       action();
       return;
     }
-    const last = lsGet<number>(COOLDOWN_KEY, 0);
-    const now = Date.now();
-    if (now - last < ads.cooldownSeconds * 1000) {
-      action();
-      return;
-    }
-    lsSet(COOLDOWN_KEY, now);
     try {
       window.open(ads.directLink, "_blank", "noopener,noreferrer");
     } catch {
