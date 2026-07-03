@@ -6,20 +6,33 @@ import { getAds } from "@/lib/site";
  * immediately runs the original action so the user never re-enters data. When
  * ads aren't enabled, runs the action directly.
  */
-export function withAdGate(action: () => void) {
+export function withAdGate(action: () => void | Promise<void>) {
   return () => {
     const ads = getAds();
     if (!ads.enabled || !ads.directLink) {
-      action();
+      void action();
       return;
     }
+    // Run the action first (within the user gesture) so the download/print
+    // isn't cancelled when the browser switches to the ad tab, especially on
+    // mobile. Then open the direct link.
+    const openAd = () => {
+      try {
+        window.open(ads.directLink, "_blank", "noopener,noreferrer");
+      } catch {
+        /* ignore popup block */
+      }
+    };
     try {
-      window.open(ads.directLink, "_blank", "noopener,noreferrer");
+      const result = action();
+      if (result && typeof (result as Promise<void>).then === "function") {
+        (result as Promise<void>).finally(openAd);
+      } else {
+        openAd();
+      }
     } catch {
-      /* ignore popup block */
+      openAd();
     }
-    // Resume immediately on the current tab so the user doesn't lose state.
-    action();
   };
 }
 
