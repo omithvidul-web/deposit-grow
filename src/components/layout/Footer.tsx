@@ -1,6 +1,6 @@
 import { Link } from "@tanstack/react-router";
 import { useApp } from "@/contexts/AppContext";
-import logoUrl from "@/assets/logo.png";
+import { logoDataUrl as logoUrl } from "@/assets/logo-data";
 
 export function Footer() {
   const { content, site } = useApp();
