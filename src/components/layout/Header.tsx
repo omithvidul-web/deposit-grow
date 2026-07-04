@@ -1,7 +1,7 @@
 import { Link } from "@tanstack/react-router";
 import { Menu, Moon, Sun, X, Home, Info, Mail, Shield, FileText } from "lucide-react";
 import { useState } from "react";
-import logoAsset from "@/assets/logo.png.asset.json";
+import logoUrl from "@/assets/logo.png";
 import { useApp } from "@/contexts/AppContext";
 import { CURRENCIES, type CurrencyCode } from "@/lib/currency";
 import {
@@ -47,7 +47,7 @@ export function Header() {
           >
             <div className="flex items-center gap-3 px-6 pt-6 pb-5 border-b border-border/50">
               <img
-                src={logoAsset.url}
+                src={logoUrl}
                 alt={`${site.siteName} logo`}
                 className="h-10 w-10 rounded-full shadow-sm"
               />
@@ -86,13 +86,13 @@ export function Header() {
         {/* Center: Logo */}
         <Link to="/" className="flex items-center justify-center gap-2 group min-w-0">
           <img
-            src={logoAsset.url}
+            src={logoUrl}
             alt={`${site.siteName} logo`}
             className="h-8 w-8 shrink-0 rounded-full shadow-sm transition-transform group-hover:scale-105"
           />
-          <div className="leading-tight text-center hidden xs:block sm:block">
+          <div className="leading-tight text-center block min-w-0">
             <div className="font-display text-sm sm:text-base font-semibold tracking-tight truncate">
-              {site.siteName}
+{site.siteName}
             </div>
             <div className="hidden sm:block text-[10px] uppercase tracking-[0.18em] text-muted-foreground">
               Calculate · Compare · Grow
