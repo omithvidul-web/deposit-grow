@@ -40,15 +40,28 @@ export function GrowthChart({
 
   const exportPng = async () => {
     if (!ref.current) return;
-    const png = await toPng(ref.current, {
-      cacheBust: true,
-      pixelRatio: 2,
-      backgroundColor: "#ffffff",
-    });
-    const a = document.createElement("a");
-    a.href = png;
-    a.download = `growth-chart-${Date.now()}.png`;
-    a.click();
+    const node = ref.current;
+    const prevBg = node.style.backgroundColor;
+    node.style.backgroundColor = "#ffffff";
+    await new Promise((r) => requestAnimationFrame(() => r(null)));
+    try {
+      const png = await toPng(node, {
+        cacheBust: true,
+        pixelRatio: 2,
+        backgroundColor: "#ffffff",
+        style: { backgroundColor: "#ffffff" },
+        filter: (el) => {
+          if (!(el instanceof HTMLElement)) return true;
+          return !el.classList?.contains("recharts-tooltip-wrapper");
+        },
+      });
+      const a = document.createElement("a");
+      a.href = png;
+      a.download = `growth-chart-${Date.now()}.png`;
+      a.click();
+    } finally {
+      node.style.backgroundColor = prevBg;
+    }
   };
 
   return (
@@ -64,7 +77,7 @@ export function GrowthChart({
           <Download className="mr-1.5 h-3.5 w-3.5" /> PNG
         </Button>
       </div>
-      <div ref={ref} className="h-[280px] w-full bg-white p-2 rounded-xl">
+      <div ref={ref} className="h-[280px] w-full bg-white p-2 rounded-xl" style={{ backgroundColor: "#ffffff" }}>
         <ResponsiveContainer width="100%" height="100%">
           <AreaChart data={series} margin={{ left: 8, right: 8, top: 10, bottom: 0 }}>
             <defs>
