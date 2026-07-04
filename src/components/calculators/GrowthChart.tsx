@@ -77,7 +77,7 @@ export function GrowthChart({
           <Download className="mr-1.5 h-3.5 w-3.5" /> PNG
         </Button>
       </div>
-      <div ref={ref} className="h-[280px] w-full bg-white p-2 rounded-xl">
+      <div ref={ref} className="h-[280px] w-full bg-white p-2 rounded-xl" style={{ backgroundColor: "#ffffff" }}>
         <ResponsiveContainer width="100%" height="100%">
           <AreaChart data={series} margin={{ left: 8, right: 8, top: 10, bottom: 0 }}>
             <defs>
