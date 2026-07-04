@@ -1,7 +1,7 @@
 import { Link } from "@tanstack/react-router";
 import { Menu, Moon, Sun, X, Home, Info, Mail, Shield, FileText } from "lucide-react";
 import { useState } from "react";
-import logoAsset from "@/assets/logo.png.asset.json";
+import logoUrl from "@/assets/logo.png";
 import { useApp } from "@/contexts/AppContext";
 import { CURRENCIES, type CurrencyCode } from "@/lib/currency";
 import {
