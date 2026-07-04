@@ -90,9 +90,9 @@ export function Header() {
             alt={`${site.siteName} logo`}
             className="h-8 w-8 shrink-0 rounded-full shadow-sm transition-transform group-hover:scale-105"
           />
-          <div className="leading-tight text-center hidden xs:block sm:block">
+          <div className="leading-tight text-center block min-w-0">
             <div className="font-display text-sm sm:text-base font-semibold tracking-tight truncate">
-              {site.siteName}
+{site.siteName}
             </div>
             <div className="hidden sm:block text-[10px] uppercase tracking-[0.18em] text-muted-foreground">
               Calculate · Compare · Grow
