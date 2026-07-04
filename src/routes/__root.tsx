@@ -10,7 +10,7 @@ import {
 import { useEffect, type ReactNode } from "react";
 
 import appCss from "../styles.css?url";
-import logoAsset from "../assets/logo.png.asset.json";
+import logoUrl from "../assets/logo.png";
 import { reportLovableError } from "../lib/lovable-error-reporting";
 import { SiteLayout } from "../components/layout/SiteLayout";
 
@@ -92,8 +92,8 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
     ],
     links: [
       { rel: "stylesheet", href: appCss },
-      { rel: "icon", type: "image/png", href: logoAsset.url },
-      { rel: "apple-touch-icon", href: logoAsset.url },
+      { rel: "icon", type: "image/png", href: logoUrl },
+      { rel: "apple-touch-icon", href: logoUrl },
       { rel: "manifest", href: "/manifest.webmanifest" },
     ],
     scripts: [

@@ -1,6 +1,6 @@
 import { Link } from "@tanstack/react-router";
 import { useApp } from "@/contexts/AppContext";
-import logoAsset from "@/assets/logo.png.asset.json";
+import logoUrl from "@/assets/logo.png";
 
 export function Footer() {
   const { content, site } = useApp();
@@ -10,7 +10,7 @@ export function Footer() {
         <div className="grid gap-10 md:grid-cols-3">
           <div>
             <div className="flex items-center gap-2.5">
-              <img src={logoAsset.url} alt="" className="h-8 w-8 rounded-full" />
+              <img src={logoUrl} alt="" className="h-8 w-8 rounded-full" />
               <div className="font-display text-base font-semibold">{site.siteName}</div>
             </div>
             <p className="mt-3 text-sm text-muted-foreground max-w-xs">

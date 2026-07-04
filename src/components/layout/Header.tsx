@@ -47,7 +47,7 @@ export function Header() {
           >
             <div className="flex items-center gap-3 px-6 pt-6 pb-5 border-b border-border/50">
               <img
-                src={logoAsset.url}
+                src={logoUrl}
                 alt={`${site.siteName} logo`}
                 className="h-10 w-10 rounded-full shadow-sm"
               />
@@ -86,7 +86,7 @@ export function Header() {
         {/* Center: Logo */}
         <Link to="/" className="flex items-center justify-center gap-2 group min-w-0">
           <img
-            src={logoAsset.url}
+            src={logoUrl}
             alt={`${site.siteName} logo`}
             className="h-8 w-8 shrink-0 rounded-full shadow-sm transition-transform group-hover:scale-105"
           />
