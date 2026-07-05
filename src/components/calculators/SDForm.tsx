@@ -61,7 +61,6 @@ export function SDForm({
     }
     const r = calcSD(inputs);
     trackCalc({ calculator: "SD", amount: inputs.opening, rate: inputs.ratePct, currency });
-    pushHistory({ calculator: "SD", currency, inputs, result: r });
     onResult(r);
   }
 
