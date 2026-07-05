@@ -103,7 +103,7 @@ export function Header() {
         {/* Right: Currency + Theme */}
         <div className="flex items-center gap-1.5 justify-end">
           <Select value={currency} onValueChange={(v) => setCurrency(v as CurrencyCode)}>
-            <SelectTrigger className="h-9 w-[76px] sm:w-[88px]">
+            <SelectTrigger className="h-9 w-auto min-w-[90px] sm:min-w-[100px]">
               <SelectValue />
             </SelectTrigger>
             <SelectContent>
