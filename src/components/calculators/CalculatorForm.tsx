@@ -14,7 +14,7 @@ import {
 import { Tabs, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Sparkles, Download } from "lucide-react";
 import { trackCalc } from "@/lib/analytics";
-import { pushHistory } from "@/lib/history";
+
 import { useNavigate } from "@tanstack/react-router";
 
 export type FDInputs = {
@@ -72,7 +72,6 @@ export function CalculatorForm({
         method: inputs.method,
       });
       trackCalc({ calculator: "FD", amount: inputs.principal, rate: inputs.ratePct, currency });
-      pushHistory({ calculator: "FD", currency, inputs, result: r });
       onResult(r, true);
     } else if (variant === "TD") {
       // TD = compound monthly fixed
@@ -84,7 +83,6 @@ export function CalculatorForm({
         method: "compound",
       });
       trackCalc({ calculator: "TD", amount: inputs.principal, rate: inputs.ratePct, currency });
-      pushHistory({ calculator: "TD", currency, inputs, result: r });
       onResult(r, true);
     } else {
       // SD handled in dedicated wrapper
