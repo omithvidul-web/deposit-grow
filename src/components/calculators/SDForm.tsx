@@ -13,7 +13,7 @@ import {
 } from "@/components/ui/select";
 import { Sparkles, Download } from "lucide-react";
 import { trackCalc } from "@/lib/analytics";
-import { pushHistory } from "@/lib/history";
+
 import { useNavigate } from "@tanstack/react-router";
 
 export type SDInputs = {

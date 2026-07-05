@@ -14,7 +14,7 @@ import {
 import { Tabs, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Sparkles, Download } from "lucide-react";
 import { trackCalc } from "@/lib/analytics";
-import { pushHistory } from "@/lib/history";
+
 import { useNavigate } from "@tanstack/react-router";
 
 export type FDInputs = {
