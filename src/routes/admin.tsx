@@ -109,9 +109,10 @@ function AdminDashboard() {
         </Button>
       </div>
       <Tabs defaultValue="analytics">
-        <TabsList className="grid w-full grid-cols-2 sm:grid-cols-6 h-auto p-1">
+        <TabsList className="grid w-full grid-cols-2 sm:grid-cols-4 lg:grid-cols-7 h-auto p-1">
           <TabsTrigger value="analytics" className="gap-1.5"><BarChart3 className="h-4 w-4" />Analytics</TabsTrigger>
           <TabsTrigger value="ads" className="gap-1.5"><Megaphone className="h-4 w-4" />Ads</TabsTrigger>
+          <TabsTrigger value="adsense" className="gap-1.5"><DollarSign className="h-4 w-4" />AdSense</TabsTrigger>
           <TabsTrigger value="settings" className="gap-1.5"><Settings className="h-4 w-4" />Site</TabsTrigger>
           <TabsTrigger value="content" className="gap-1.5"><FileEdit className="h-4 w-4" />Content</TabsTrigger>
           <TabsTrigger value="reports" className="gap-1.5"><FileText className="h-4 w-4" />Reports</TabsTrigger>
@@ -120,6 +121,7 @@ function AdminDashboard() {
         <div className="mt-6">
           <TabsContent value="analytics"><AnalyticsTab /></TabsContent>
           <TabsContent value="ads"><AdsTab /></TabsContent>
+          <TabsContent value="adsense"><AdSenseTab /></TabsContent>
           <TabsContent value="settings"><SettingsTab /></TabsContent>
           <TabsContent value="content"><ContentTab /></TabsContent>
           <TabsContent value="reports"><ReportsTab /></TabsContent>
