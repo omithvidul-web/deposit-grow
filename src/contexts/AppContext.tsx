@@ -81,6 +81,8 @@ export function AppProvider({ children }: { children: ReactNode }) {
     refreshAds: () => setAdsS(getAds()),
     content,
     refreshContent: () => setContentS(getContent()),
+    adsense,
+    refreshAdSense: () => setAdSenseS(getAdSense()),
   };
   return <AppCtx.Provider value={value}>{children}</AppCtx.Provider>;
 }
