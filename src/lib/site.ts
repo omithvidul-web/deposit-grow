@@ -164,3 +164,12 @@ export function getContent(): ContentStore {
 export function setContent(c: ContentStore) {
   lsSet(CK, c);
 }
+
+export function getAdSense(): AdSenseSettings {
+  const stored = lsGet(GK, defaultAdSense);
+  return { ...defaultAdSense, ...stored, units: stored.units ?? [] };
+}
+export function setAdSense(s: AdSenseSettings) {
+  lsSet(GK, s);
+}
+
