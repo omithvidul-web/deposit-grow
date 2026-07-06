@@ -17,6 +17,9 @@ type Ctx = {
   refreshAds: () => void;
   content: ContentStore;
   refreshContent: () => void;
+  adsense: AdSenseSettings;
+  refreshAdSense: () => void;
+
 };
 
 const AppCtx = createContext<Ctx | null>(null);
