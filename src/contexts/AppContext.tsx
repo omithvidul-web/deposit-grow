@@ -48,6 +48,7 @@ export function AppProvider({ children }: { children: ReactNode }) {
     setSiteS(getSite());
     setAdsS(getAds());
     setContentS(getContent());
+    setAdSenseS(getAdSense());
   }, []);
 
   // apply theme class
