@@ -30,6 +30,7 @@ export function AppProvider({ children }: { children: ReactNode }) {
   const [site, setSiteS] = useState<SiteSettings>(getSite());
   const [ads, setAdsS] = useState<AdsterraSettings>(getAds());
   const [content, setContentS] = useState<ContentStore>(getContent());
+  const [adsense, setAdSenseS] = useState<AdSenseSettings>(getAdSense());
 
   // hydrate from storage on mount
   useEffect(() => {
