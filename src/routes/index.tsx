@@ -88,6 +88,8 @@ function HomePage() {
       </section>
 
       <AdSlot kind="banner" />
+      <AdSenseSlot location="home-top" />
+
 
       {/* Calculator */}
       <section id="calc" className="scroll-mt-20">
