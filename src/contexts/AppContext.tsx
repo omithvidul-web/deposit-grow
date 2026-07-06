@@ -1,7 +1,7 @@
 import { createContext, useContext, useEffect, useState, type ReactNode } from "react";
 import { lsGet, lsSet } from "@/lib/storage";
 import type { CurrencyCode } from "@/lib/currency";
-import { getSite, getAds, getContent, type SiteSettings, type AdsterraSettings, type ContentStore } from "@/lib/site";
+import { getSite, getAds, getContent, getAdSense, type SiteSettings, type AdsterraSettings, type ContentStore, type AdSenseSettings } from "@/lib/site";
 
 type Theme = "light" | "dark";
 
