@@ -176,6 +176,8 @@ function HomePage() {
           <p className="mt-3 text-sm text-muted-foreground">{content.contact}</p>
         </div>
       </section>
+
+      <AdSenseSlot location="home-bottom" />
     </div>
   );
 }
