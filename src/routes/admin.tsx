@@ -305,6 +305,169 @@ function AdsTab() {
   );
 }
 
+function AdSenseTab() {
+  const { refreshAdSense } = useApp();
+  const [s, setS] = useState(getAdSense());
+
+  function save(next: typeof s) {
+    setS(next);
+    setAdSense(next);
+    refreshAdSense();
+  }
+
+  function addUnit() {
+    const unit: AdSenseUnit = {
+      id: (crypto.randomUUID?.() ?? String(Date.now())),
+      name: "New Ad Unit",
+      format: "responsive",
+      clientId: s.clientId || "",
+      slotId: "",
+      location: "home-top",
+      enabled: true,
+    };
+    save({ ...s, units: [...s.units, unit] });
+  }
+
+  function updateUnit(id: string, patch: Partial<AdSenseUnit>) {
+    save({
+      ...s,
+      units: s.units.map((u) => (u.id === id ? { ...u, ...patch } : u)),
+    });
+  }
+
+  function removeUnit(id: string) {
+    save({ ...s, units: s.units.filter((u) => u.id !== id) });
+  }
+
+  return (
+    <div className="grid gap-4 max-w-4xl">
+      <div className="glass rounded-2xl p-5 flex items-center justify-between">
+        <div>
+          <div className="font-display text-base font-semibold">Google AdSense enabled</div>
+          <div className="text-xs text-muted-foreground">
+            Master toggle for all AdSense units across the site.
+          </div>
+        </div>
+        <Switch checked={s.enabled} onCheckedChange={(v) => save({ ...s, enabled: v })} />
+      </div>
+
+      <div className="glass rounded-2xl p-5 grid gap-3">
+        <div>
+          <Label>Default AdSense Publisher / Client ID</Label>
+          <Input
+            placeholder="ca-pub-XXXXXXXXXXXXXXXX"
+            value={s.clientId}
+            onChange={(e) => save({ ...s, clientId: e.target.value.trim() })}
+          />
+          <p className="mt-1 text-xs text-muted-foreground">
+            Used as default when creating new ad units. Each unit can still override.
+          </p>
+        </div>
+      </div>
+
+      <div className="flex items-center justify-between">
+        <div className="font-display text-base font-semibold">Ad units ({s.units.length})</div>
+        <Button size="sm" className="gradient-brand text-white" onClick={addUnit}>
+          <Plus className="mr-1 h-4 w-4" /> Add ad unit
+        </Button>
+      </div>
+
+      {s.units.length === 0 ? (
+        <div className="glass rounded-2xl p-6 text-sm text-muted-foreground">
+          No ad units yet. Click "Add ad unit" to create your first AdSense placement.
+        </div>
+      ) : (
+        s.units.map((u) => (
+          <div key={u.id} className="glass rounded-2xl p-5 grid gap-3">
+            <div className="flex items-center justify-between gap-3">
+              <Input
+                className="max-w-sm font-medium"
+                value={u.name}
+                placeholder="Ad Unit Name"
+                onChange={(e) => updateUnit(u.id, { name: e.target.value })}
+              />
+              <div className="flex items-center gap-3">
+                <div className="flex items-center gap-2 text-xs">
+                  <span className="text-muted-foreground">Enabled</span>
+                  <Switch
+                    checked={u.enabled}
+                    onCheckedChange={(v) => updateUnit(u.id, { enabled: v })}
+                  />
+                </div>
+                <Button variant="ghost" size="icon" onClick={() => removeUnit(u.id)}>
+                  <Trash2 className="h-4 w-4" />
+                </Button>
+              </div>
+            </div>
+
+            <div className="grid gap-3 md:grid-cols-2">
+              <div>
+                <Label>Ad type / format</Label>
+                <Select
+                  value={u.format}
+                  onValueChange={(v) => updateUnit(u.id, { format: v as AdSenseFormat })}
+                >
+                  <SelectTrigger><SelectValue /></SelectTrigger>
+                  <SelectContent>
+                    {ADSENSE_FORMATS.map((f) => (
+                      <SelectItem key={f} value={f}>{f}</SelectItem>
+                    ))}
+                  </SelectContent>
+                </Select>
+              </div>
+              <div>
+                <Label>Placement location</Label>
+                <Select
+                  value={u.location}
+                  onValueChange={(v) => updateUnit(u.id, { location: v as AdSenseLocation })}
+                >
+                  <SelectTrigger><SelectValue /></SelectTrigger>
+                  <SelectContent>
+                    {ADSENSE_LOCATIONS.map((l) => (
+                      <SelectItem key={l} value={l}>{l}</SelectItem>
+                    ))}
+                  </SelectContent>
+                </Select>
+              </div>
+              <div>
+                <Label>Client ID (ca-pub-...)</Label>
+                <Input
+                  placeholder="ca-pub-XXXXXXXXXXXXXXXX"
+                  value={u.clientId}
+                  onChange={(e) => updateUnit(u.id, { clientId: e.target.value.trim() })}
+                />
+              </div>
+              <div>
+                <Label>Slot ID</Label>
+                <Input
+                  placeholder="1234567890"
+                  value={u.slotId}
+                  onChange={(e) => updateUnit(u.id, { slotId: e.target.value.trim() })}
+                />
+              </div>
+              {u.format === "in-feed" && (
+                <div className="md:col-span-2">
+                  <Label>In-feed layout key (optional)</Label>
+                  <Input
+                    placeholder="-6t+ed+2i-1n-4w"
+                    value={u.layoutKey ?? ""}
+                    onChange={(e) => updateUnit(u.id, { layoutKey: e.target.value.trim() })}
+                  />
+                </div>
+              )}
+            </div>
+          </div>
+        ))
+      )}
+
+      <div className="text-xs text-muted-foreground">
+        Changes save automatically. Ads appear across the site instantly — no redeploy needed.
+        Publisher approval and policy compliance are your responsibility.
+      </div>
+    </div>
+  );
+}
+
 function SettingsTab() {
   const { refreshSite } = useApp();
   const [s, setS] = useState(getSite());
