@@ -21,12 +21,20 @@ import {
   setAds,
   setContent,
   setSite,
+  getAdSense,
+  setAdSense,
+  ADSENSE_LOCATIONS,
+  ADSENSE_FORMATS,
+  type AdSenseUnit,
+  type AdSenseFormat,
+  type AdSenseLocation,
 } from "@/lib/site";
 import { getAnalytics, resetAnalytics, mode, topKey } from "@/lib/analytics";
 import { clearHistory, getHistory } from "@/lib/history";
 import { formatMoney } from "@/lib/currency";
 import type { CurrencyCode } from "@/lib/currency";
-import { ShieldAlert, Trash2, Download, Upload, BarChart3, Megaphone, Settings, FileText, FileSpreadsheet, DatabaseBackup, FileEdit } from "lucide-react";
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
+import { ShieldAlert, Trash2, Download, Upload, BarChart3, Megaphone, Settings, FileText, FileSpreadsheet, DatabaseBackup, FileEdit, Plus, DollarSign } from "lucide-react";
 
 const ADMIN_CODE = (import.meta.env.VITE_ADMIN_CODE as string | undefined) ?? "060245";
 
