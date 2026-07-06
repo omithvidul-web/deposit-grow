@@ -125,10 +125,13 @@ function HomePage() {
 
       {/* History */}
       <section className="mt-16">
+        <AdSenseSlot location="home-middle" />
         <HistoryPanel />
+        <AdSenseSlot location="in-feed" />
       </section>
 
       <AdSlot kind="native" />
+
 
       {/* Tips */}
       <section className="mt-20">
