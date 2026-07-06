@@ -1,7 +1,7 @@
 import { createContext, useContext, useEffect, useState, type ReactNode } from "react";
 import { lsGet, lsSet } from "@/lib/storage";
 import type { CurrencyCode } from "@/lib/currency";
-import { getSite, getAds, getContent, type SiteSettings, type AdsterraSettings, type ContentStore } from "@/lib/site";
+import { getSite, getAds, getContent, getAdSense, type SiteSettings, type AdsterraSettings, type ContentStore, type AdSenseSettings } from "@/lib/site";
 
 type Theme = "light" | "dark";
 
@@ -17,6 +17,9 @@ type Ctx = {
   refreshAds: () => void;
   content: ContentStore;
   refreshContent: () => void;
+  adsense: AdSenseSettings;
+  refreshAdSense: () => void;
+
 };
 
 const AppCtx = createContext<Ctx | null>(null);
@@ -27,6 +30,7 @@ export function AppProvider({ children }: { children: ReactNode }) {
   const [site, setSiteS] = useState<SiteSettings>(getSite());
   const [ads, setAdsS] = useState<AdsterraSettings>(getAds());
   const [content, setContentS] = useState<ContentStore>(getContent());
+  const [adsense, setAdSenseS] = useState<AdSenseSettings>(getAdSense());
 
   // hydrate from storage on mount
   useEffect(() => {
@@ -44,6 +48,7 @@ export function AppProvider({ children }: { children: ReactNode }) {
     setSiteS(getSite());
     setAdsS(getAds());
     setContentS(getContent());
+    setAdSenseS(getAdSense());
   }, []);
 
   // apply theme class
@@ -76,6 +81,8 @@ export function AppProvider({ children }: { children: ReactNode }) {
     refreshAds: () => setAdsS(getAds()),
     content,
     refreshContent: () => setContentS(getContent()),
+    adsense,
+    refreshAdSense: () => setAdSenseS(getAdSense()),
   };
   return <AppCtx.Provider value={value}>{children}</AppCtx.Provider>;
 }

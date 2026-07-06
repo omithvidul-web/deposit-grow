@@ -29,6 +29,59 @@ export type ContentStore = {
 const SK = "dc.site.v1";
 const AK = "dc.ads.v1";
 const CK = "dc.content.v1";
+const GK = "dc.adsense.v1";
+
+export type AdSenseFormat = "display" | "responsive" | "in-article" | "in-feed";
+export type AdSenseLocation =
+  | "header"
+  | "home-top"
+  | "home-middle"
+  | "home-bottom"
+  | "in-article"
+  | "in-feed"
+  | "sidebar"
+  | "footer";
+
+export type AdSenseUnit = {
+  id: string;
+  name: string;
+  format: AdSenseFormat;
+  clientId: string; // ca-pub-XXXXXXXX
+  slotId: string;
+  location: AdSenseLocation;
+  enabled: boolean;
+  layoutKey?: string; // optional, for in-feed
+};
+
+export type AdSenseSettings = {
+  enabled: boolean;
+  clientId: string; // default pub id for auto script
+  units: AdSenseUnit[];
+};
+
+export const defaultAdSense: AdSenseSettings = {
+  enabled: false,
+  clientId: "",
+  units: [],
+};
+
+export const ADSENSE_LOCATIONS: AdSenseLocation[] = [
+  "header",
+  "home-top",
+  "home-middle",
+  "home-bottom",
+  "in-article",
+  "in-feed",
+  "sidebar",
+  "footer",
+];
+
+export const ADSENSE_FORMATS: AdSenseFormat[] = [
+  "display",
+  "responsive",
+  "in-article",
+  "in-feed",
+];
 
 export const defaultSite: SiteSettings = {
   siteName: "Deposit Calculator",
@@ -111,3 +164,12 @@ export function getContent(): ContentStore {
 export function setContent(c: ContentStore) {
   lsSet(CK, c);
 }
+
+export function getAdSense(): AdSenseSettings {
+  const stored = lsGet(GK, defaultAdSense);
+  return { ...defaultAdSense, ...stored, units: stored.units ?? [] };
+}
+export function setAdSense(s: AdSenseSettings) {
+  lsSet(GK, s);
+}
+

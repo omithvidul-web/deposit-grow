@@ -3,6 +3,7 @@ import { CalculatorSection } from "@/components/calculators/CalculatorSection";
 import { HistoryPanel } from "@/components/history/HistoryPanel";
 import { useApp } from "@/contexts/AppContext";
 import { AdSlot } from "@/components/ads/AdsGate";
+import { AdSenseSlot } from "@/components/ads/AdSense";
 import {
   Sparkles,
   ShieldCheck,
@@ -87,6 +88,8 @@ function HomePage() {
       </section>
 
       <AdSlot kind="banner" />
+      <AdSenseSlot location="home-top" />
+
 
       {/* Calculator */}
       <section id="calc" className="scroll-mt-20">
@@ -122,10 +125,13 @@ function HomePage() {
 
       {/* History */}
       <section className="mt-16">
+        <AdSenseSlot location="home-middle" />
         <HistoryPanel />
+        <AdSenseSlot location="in-feed" />
       </section>
 
       <AdSlot kind="native" />
+
 
       {/* Tips */}
       <section className="mt-20">
@@ -170,6 +176,8 @@ function HomePage() {
           <p className="mt-3 text-sm text-muted-foreground">{content.contact}</p>
         </div>
       </section>
+
+      <AdSenseSlot location="home-bottom" />
     </div>
   );
 }
